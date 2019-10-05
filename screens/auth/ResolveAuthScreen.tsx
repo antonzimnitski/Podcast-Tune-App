@@ -1,20 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
-const ResolveAuthScreen = () => {
+const ResolveAuthScreen = ({ navigation }) => {
+  const { error, data } = useQuery(userQuery);
+
+  useEffect(() => {
+    if (error) console.log(`ResolveAuthScreen: ${error}`);
+  }, [error]);
+
+  useEffect(() => {
+    data &&
+      (data.me ? navigation.navigate('Home') : navigation.navigate('Register'));
+  }, [data]);
+
   return (
-    <View style={styles.container}>
-      <Text>ResolveAuthScreen</Text>
+    <View style={styles.screen}>
+      <ActivityIndicator size="large" />
     </View>
   );
 };
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   }
 });
+
+const userQuery = gql`
+  query userQuery {
+    me {
+      id
+      email
+      name
+      permissions
+    }
+  }
+`;
 
 export default ResolveAuthScreen;

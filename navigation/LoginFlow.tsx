@@ -2,13 +2,18 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 
-const LoginFlow = createStackNavigator({
-  Register: {
-    screen: RegisterScreen
+const LoginFlow = createStackNavigator(
+  {
+    Register: {
+      screen: RegisterScreen
+    },
+    Login: {
+      screen: LoginScreen
+    }
   },
-  Login: {
-    screen: LoginScreen
+  {
+    headerMode: 'none'
   }
-});
+);
 
 export default LoginFlow;
