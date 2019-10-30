@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { StatelessComponent, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import gql from 'graphql-tag';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { useQuery } from '@apollo/react-hooks';
 
-const ResolveAuthScreen = ({ navigation }) => {
-  const { error, data } = useQuery(userQuery);
+interface Props {
+  navigation: NavigationStackProp;
+}
 
-  useEffect(() => {
-    if (error) console.log(`ResolveAuthScreen: ${error}`);
-  }, [error]);
+const ResolveAuthScreen: StatelessComponent<Props> = ({ navigation }) => {
+  const { data } = useQuery(userQuery);
 
   useEffect(() => {
     data &&
-      (data.me ? navigation.navigate('Home') : navigation.navigate('Register'));
+      (data.me ? navigation.navigate('Home') : navigation.navigate('Auth'));
   }, [data]);
 
   return (
@@ -21,6 +22,7 @@ const ResolveAuthScreen = ({ navigation }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

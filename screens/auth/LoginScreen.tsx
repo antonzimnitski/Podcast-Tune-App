@@ -1,9 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { StatelessComponent } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { NavigationStackProp } from 'react-navigation-stack';
 
-const LoginScreen = () => (
+interface Props {
+  navigation: NavigationStackProp;
+}
+
+const LoginScreen: StatelessComponent<Props> = ({ navigation }) => (
   <View style={styles.container}>
     <Text>LoginScreen</Text>
+    <Button
+      title="To Register"
+      onPress={() => navigation.navigate('Register')}
+    ></Button>
   </View>
 );
 

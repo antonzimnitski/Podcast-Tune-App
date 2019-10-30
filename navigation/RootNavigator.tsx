@@ -1,11 +1,11 @@
 import { createSwitchNavigator } from 'react-navigation';
 import MainFlow from './MainFlow';
-import LoginFlow from './LoginFlow';
+import AuthFlow from './AuthFlow';
 import ResolveAuthScreen from './../screens/auth/ResolveAuthScreen';
 
 const RootNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
-  LoginFlow,
+  AuthFlow,
   MainFlow
 });
 
